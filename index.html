@@ -185,16 +185,20 @@
             to { transform: rotate(360deg); }
         }
         
-        /* ẢNH HIỆN RA SAU KHI MỞ HỘP QUÀ VÀ BAY ĐI */
+        /* ẢNH HIỆN RA SAU KHI MỞ HỘP QUÀ VÀ BAY ĐI - ĐÃ TỐI ƯU GỌN VÀ ĐẸP HƠN */
         #unwrapped-image {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1);
-            max-width: 80vw; 
-            max-height: 80vh;
-            border: 5px solid #ffccff; 
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+            /* Giới hạn kích thước ảnh mở hộp, gọn hơn */
+            max-width: 65vw; 
+            max-height: 65vh;
+            width: auto; /* Tự động theo tỉ lệ */
+            height: auto;
+            border: 5px solid #FF00EA; /* Viền đậm hơn */
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 40px #ffccff; /* Shadow sáng hơn */
+            border-radius: 8px; /* Bo góc */
             display: none; 
             z-index: 100;
             object-fit: contain; 
@@ -209,8 +213,8 @@
 
         @keyframes imageFlyOut {
             0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            50% { transform: translate(50vw, 50vh) scale(0.5); opacity: 0.8; }
-            100% { transform: translate(-50%, 150vh) scale(0.1); opacity: 0; } 
+            50% { transform: translate(50vw, 50vh) rotate(30deg) scale(0.7); opacity: 0.8; }
+            100% { transform: translate(-50%, 150vh) rotate(90deg) scale(0.1); opacity: 0; } 
         }
 
         /* HỘP QUÀ CỦA ANH VINH - ĐẸP NHƯ ẢNH GỬI! */
@@ -410,9 +414,7 @@
 
 <script>
     const NEW_STICKER_URL = 'https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeWt6ZWNvdnd0NnVrNXV2NXp5cHhpYzlzZjdsNGRmZjg4bncwdWFydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/oz45ELYgMoYVsZqmor/giphy.gif';
-    // ĐỊT MẸ, ĐÃ THAY THẾ LINK ẢNH BAY (MỞ HỘP QUÀ)
     const UNWRAPPED_IMAGE_SRC = 'https://i.postimg.cc/6q0Kzfd7/att-2a-Bs-B6Xg-Mmr0ZX81Pza-I2V1h3XEg-M-Ix-CEG5w9Tle0A.jpg'; 
-    // ĐỊT MẸ, ĐÃ THAY THẾ LINK ẢNH RƠI (BỔ SUNG)
     const ADDITIONAL_IMAGE_SRC = 'https://i.postimg.cc/zG3NSW3N/att-ik-QQwg-AK8YZkb-Vtr-UKd1M9h-Q-d-N-Gs-Kawa-Kzh-PVrw-U.jpg'; 
 
     let stickerRainInterval;
@@ -424,9 +426,9 @@
         let size, scale;
 
         if (isImageReborn) {
-            // Ảnh rơi (cũ và mới) sẽ có kích thước từ 70px đến 100px
-            size = 70 + Math.random() * 30; 
-            scale = 0.6 + Math.random() * 0.4; // Scale lớn hơn, bắt đầu 0.6-1.0
+            // ĐỊT MẸ, ĐÃ CHỈNH KÍCH THƯỚC ẢNH RƠI GỌN HƠN (50px đến 80px)
+            size = 50 + Math.random() * 30; 
+            scale = 0.5 + Math.random() * 0.3; // Scale nhỏ hơn, 0.5-0.8
         } else {
             // Giữ nguyên kích thước nhỏ cho sticker GIF
             size = 25 + Math.random() * 40; 
